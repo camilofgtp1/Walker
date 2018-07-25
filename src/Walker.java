@@ -6,17 +6,19 @@ import java.util.Random;
 
 public class Walker extends JPanel implements ActionListener {
 
-    Timer t = new Timer(5, this);
-    int x=300;
-    int velX=1;
-    int y=300;
-    int velY=1;
+    Timer t = new Timer(200, this);
     Random random= new Random();
+
+    //with random starting point
+    int x=random.nextInt(600);
+    int velX=1;
+    int y=random.nextInt(600);
+    int velY=1;
 
     public void paintComponent(Graphics g){
         //super.paintComponent(g);
         g.setColor(Color.black);
-        g.drawOval(x,y, 1, 1);
+        g.drawOval(x,y, 2, 2);
 
         t.start();
     }
@@ -24,20 +26,18 @@ public class Walker extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event){
 
-        int prob= random.nextInt(4);
+        int prob= random.nextInt(100);
 
-        //if(x<600 || x< 0 || y<600  || y>0){
-
-        if (prob==0){
+        if (prob<20){
             y--;
         }
-        if (prob==1){
+         else if (prob<30 && prob >10){
             x--;
         }
-        if(prob==2){
+         else if(prob>30 && prob <35){
             y++;
         }
-        if(prob==3){
+        else{
             x++;
         }
 
