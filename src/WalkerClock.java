@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.Vector;
+
 
 public class WalkerClock extends JPanel implements ActionListener {
 
@@ -14,6 +16,10 @@ public class WalkerClock extends JPanel implements ActionListener {
     int velX=1;
     int y=random.nextInt(500);
     int velY=1;
+
+    double mouseX;
+    double mouseY;
+
 
     int displacement= 10;
     int prob;
@@ -29,7 +35,11 @@ public class WalkerClock extends JPanel implements ActionListener {
         g1.setColor(Color.black);
 
         g1.drawOval(x,y, 50, 50);
-        g1.drawString(prob+"", x, y);
+        g1.drawString(prob+"", x+20, y+30);
+
+        mouseX = MouseInfo.getPointerInfo().getLocation().getX();
+        mouseY = MouseInfo.getPointerInfo().getLocation().getY();
+        g1.drawLine(x,y,(int) mouseX, (int)mouseY);
 
         t.start();
     }
@@ -60,12 +70,14 @@ public class WalkerClock extends JPanel implements ActionListener {
 
     public static void main(String[] args){
 
-        JFrame j = new JFrame("walker");
+        JFrame j = new JFrame("walker Clock");
         WalkerClock w = new WalkerClock();
 
         j.setSize(600,600);
         j.setVisible(true);
+        j.setResizable(false);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        j.setLocationRelativeTo(null);
         j.add(w);
 
 
